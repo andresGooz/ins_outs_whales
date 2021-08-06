@@ -1,12 +1,14 @@
 FROM python:3.9
+RUN mkdir /Folder
+WORKDIR /Folder
 
-ADD requeriments.txt /
+COPY requeriments.txt /Folder/
 
 RUN pip install -r requeriments.txt
 
-ADD scraping.py /
+COPY best_coin.py /Folder/
 
-ADD best_coin.py /
+COPY scraping.py /Folder/
 
 CMD [ "python", "./scraping.py" ]
 

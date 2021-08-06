@@ -1,5 +1,3 @@
-#se analizan las principales wallets de Dogecoin. De la 1 a la 700.
-
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -7,8 +5,8 @@ import re
 import os
 import pathlib
 import datetime
+import csv
 
-currency_list = ['bitcoin' , 'dogecoin']
 
 def sumar_row(ins, outs, doges, row):
     try:
@@ -27,12 +25,26 @@ def sumar_row(ins, outs, doges, row):
         pass
     return ins, outs, doges
 
+#++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++
+# START PANEL DE CONFIGURACIÓN CENTRAL
+
+currency_list = ['bitcoin' , 'dogecoin']
+rangos = [100,200]
+
+# settings.
+# 1 vez al día ejecutar los comandos en las configuraciones 00 01 10 11
+selected_currency = currency_list[0]
+hasta = rangos[0]
+
+# END
+#++++++++++++++++++++++++++++++++++++++++++++++
+#++++++++++++++++++++++++++++++++++++++++++++++
+
 ins = 0
 outs = 0
 doges = 0
-selected_currency = currency_list[1]
-hasta = 1
-
+hasta = int(hasta/100)
 for i in range(1, hasta+1):
     url = 'https://bitinfocharts.com/top-100-richest-' + selected_currency + '-addresses-' + str(i) + '.html'
     response = requests.get(url)
@@ -47,9 +59,7 @@ for i in range(1, hasta+1):
             for row in table:
                 ins, outs, doges = sumar_row(ins, outs, doges, row)
 
-print("#" + selected_currency + " [1, "+ str(hasta) + "00]")
-print(str(datetime.datetime.now()))
-print("INS: " + f"{ins:,}")
-print("OUTS: " + f"{outs:,}")
-print("CANT: " + f"{doges:,}")
-print("__\n")
+f = open('file.csv', 'a')
+writer = csv.writer(f)
+writer.writerow([str(datetime.datetime.now()), selected_currency, "[1, "+ str(hasta) + "00]", doges, ins, outs])
+f.close()

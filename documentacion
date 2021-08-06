@@ -1,0 +1,7 @@
+LEVANTAr PROYECTO
+
+opción 1)
+              $ ./init.sh
+
+opción 2)
+              $ docker-compose up --build
