@@ -10,6 +10,7 @@ import datetime
 from re import sub
 from decimal import Decimal
 import locale
+import sys
 
 def money(number):
     precio = 0
@@ -48,6 +49,14 @@ def considerar_row(row):
     # print(lista)
     return lista
 
+orden = 2
+if (str(sys.argv[1]) == 'order_coin_market_cap'):
+    orden = 2
+
+if (str(sys.argv[1]) == 'supply_price_rate'):
+    orden = 4
+
+
 ins = 0
 outs = 0
 doges = 0
@@ -59,5 +68,5 @@ for i in range(1, 4):
     table = soup.find_all("tr")
     for row in table[1:]:
         unsorted_list.append(considerar_row(row))
-unsorted_list.sort(key=lambda x:x[4])
+unsorted_list.sort(key=lambda x:x[orden])
 print(unsorted_list)

@@ -5,9 +5,11 @@ services:
    build: .
    volumes:
      - .:/Folder
-   command: bash -c " python scraping.py dogecoin 100 &&
-                      python scraping.py dogecoin 200 &&
-                      python scraping.py bitcoin 100 &&
-                      python scraping.py bitcoin 200 &&
+   command: bash -c " true &&
+                       python scraping.py dogecoin 100 &&
+                       python scraping.py dogecoin 200 &&
+                       python scraping.py bitcoin 100 &&
+                       python scraping.py bitcoin 200 &&
                       true"
-                      # python best_coin.py &&
+                      # python best_coin.py supply_price_rate &&
+                      # python best_coin.py order_coin_market_cap &&
