@@ -6,6 +6,7 @@ import os
 import pathlib
 import datetime
 import csv
+import sys
 
 
 def sumar_row(ins, outs, doges, row):
@@ -28,14 +29,12 @@ def sumar_row(ins, outs, doges, row):
 #++++++++++++++++++++++++++++++++++++++++++++++
 #++++++++++++++++++++++++++++++++++++++++++++++
 # START PANEL DE CONFIGURACIÓN CENTRAL
-
 currency_list = ['bitcoin' , 'dogecoin']
-rangos = [100,200]
-
+hasta_list = [100, 200]
 # settings.
 # 1 vez al día ejecutar los comandos en las configuraciones 00 01 10 11
-selected_currency = currency_list[0]
-hasta = rangos[0]
+selected_currency = str(sys.argv[1])
+hasta = int(sys.argv[2])
 
 # END
 #++++++++++++++++++++++++++++++++++++++++++++++

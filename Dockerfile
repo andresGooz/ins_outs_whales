@@ -10,6 +10,6 @@ COPY best_coin.py /Folder/
 
 COPY scraping.py /Folder/
 
-CMD [ "python", "./scraping.py" ]
+#CMD [ "python", "./scraping.py" ]
 
 #CMD [ "python", "./best_coin.py" ]
