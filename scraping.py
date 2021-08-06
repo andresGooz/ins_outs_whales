@@ -8,6 +8,8 @@ import os
 import pathlib
 import datetime
 
+currency_list = ['bitcoin' , 'dogecoin']
+
 def sumar_row(ins, outs, doges, row):
     try:
         a_string = str(row.find_all("td")[2].get_text()).split(" ")[0]
@@ -28,9 +30,11 @@ def sumar_row(ins, outs, doges, row):
 ins = 0
 outs = 0
 doges = 0
+selected_currency = currency_list[1]
+hasta = 1
 
-for i in range(1, 2):
-    url = 'https://bitinfocharts.com/top-100-richest-dogecoin-addresses-'+str(i)+'.html'
+for i in range(1, hasta+1):
+    url = 'https://bitinfocharts.com/top-100-richest-' + selected_currency + '-addresses-' + str(i) + '.html'
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
     tables = soup.find_all("table", {"class": "table-striped"})
@@ -43,7 +47,9 @@ for i in range(1, 2):
             for row in table:
                 ins, outs, doges = sumar_row(ins, outs, doges, row)
 
-print("DATETIME: " + str(datetime.datetime.now()))
+print("#" + selected_currency + " [1, "+ str(hasta) + "00]")
+print(str(datetime.datetime.now()))
 print("INS: " + f"{ins:,}")
 print("OUTS: " + f"{outs:,}")
-print("DOGES: " + f"{doges:,}")
+print("CANT: " + f"{doges:,}")
+print("__\n")
